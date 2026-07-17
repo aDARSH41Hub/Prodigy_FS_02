@@ -1,0 +1,30 @@
+const express = require("express");
+const cors = require("cors");
+
+const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
+const employeeRoutes = require("./routes/employeeRoutes");
+
+
+function createApp() {
+    
+    const app = express();
+
+    app.use(cors());
+    app.use(express.json());
+
+    app.use("/api/auth",authRoutes);
+    app.use("/api/users",userRoutes);
+    app.use("/api/employees", employeeRoutes);
+
+    app.get("/health",(req,res)=>{
+        res.status(200).json({
+            status:"ok"
+        });
+    });
+  
+
+    return app;
+}
+
+module.exports =  {createApp};
