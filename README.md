@@ -15,19 +15,31 @@ Access to every employee route is restricted to authenticated admin users only, 
 
 ## 📑 Table of Contents
 
-- [Features](#-features)
-- [Architecture](#️-architecture)
-- [Project Structure](#-project-structure)
-- [Tech Stack](#️-tech-stack)
-- [API Documentation](#-api-documentation)
-- [Installation & Setup](#️-installation--setup)
-- [Environment Variables](#-environment-variables)
-- [API Testing Screenshots](#-api-testing-screenshots)
-- [Testing Checklist](#-testing-checklist)
-- [Security Highlights](#-security-highlights)
-- [Future Improvements](#-future-improvements)
-- [License](#-license)
-- [Author](#-author)
+- [🚀 Prodigy\_FS\_02 — Secure Employee Management REST API](#-prodigy_fs_02--secure-employee-management-rest-api)
+  - [📑 Table of Contents](#-table-of-contents)
+  - [✨ Features](#-features)
+    - [🗂️ Employee Management (CRUD)](#️-employee-management-crud)
+    - [🔐 Authentication \& Authorization](#-authentication--authorization)
+    - [🛡️ Data Validation \& Security](#️-data-validation--security)
+    - [⚙️ Backend Engineering](#️-backend-engineering)
+  - [🏗️ Architecture](#️-architecture)
+  - [📂 Project Structure](#-project-structure)
+  - [🛠️ Tech Stack](#️-tech-stack)
+  - [📌 API Documentation](#-api-documentation)
+    - [0. Authentication (Signup \& Login)](#0-authentication-signup--login)
+    - [1. Create Employee](#1-create-employee)
+    - [2. Get All Employees (Pagination + Search)](#2-get-all-employees-pagination--search)
+    - [3. Get Employee by ID](#3-get-employee-by-id)
+    - [4. Update Employee](#4-update-employee)
+    - [5. Delete Employee](#5-delete-employee)
+  - [⚙️ Installation \& Setup](#️-installation--setup)
+  - [🔑 Environment Variables](#-environment-variables)
+  - [🚀 Quick API Test](#-quick-api-test)
+  - [✅ Testing Checklist](#-testing-checklist)
+  - [🔒 Security Highlights](#-security-highlights)
+  - [🚀 Future Improvements](#-future-improvements)
+  - [📄 License](#-license)
+  - [👨‍💻 Author](#-author)
 
 ---
 
@@ -115,17 +127,6 @@ Prodigy_FS_02/
 │   │
 │   ├── app.js
 │   └── server.js
-│
-├── screenshots/
-│   ├── signup.png
-│   ├── login.png
-│   ├── create-employee.png
-│   ├── get-employees.png
-│   ├── get-employee-by-id.png
-│   ├── update-employee.png
-│   ├── delete-employee.png
-│   ├── unauthorized.png
-│   └── admin-only.png
 │
 ├── .env.example
 ├── .gitignore
@@ -383,43 +384,27 @@ JWT_SECRET=your_secret_key
 
 ---
 
-## 📸 API Testing Screenshots
+## 🚀 Quick API Test
 
-### Signup API
+1. **Register a user**
+   `POST /api/auth/signup`
 
-<img src="./screenshots/signup.png" width="800"/>
+2. **Log in to obtain a JWT**
+   `POST /api/auth/login`
 
-### Login API (Admin)
+3. **Promote your test user to `admin`** in MongoDB Atlas (edit the `role` field on that user's document directly — there's no public endpoint to self-assign admin).
 
-<img src="./screenshots/login.png" width="800"/>
+4. **Include the JWT in every request below**
+   `Authorization: Bearer <JWT_TOKEN>`
 
-### Create Employee (Admin)
+5. **Test the employee CRUD endpoints**
+   - `POST /api/employees` — create a record
+   - `GET /api/employees` — list, with optional `?page=&limit=&search=`
+   - `GET /api/employees/:id` — fetch one
+   - `PUT /api/employees/:id` — update
+   - `DELETE /api/employees/:id` — remove
 
-<img src="./screenshots/create-employee.png" width="800"/>
-
-### Get Employees (Pagination + Search)
-
-<img src="./screenshots/get-employees.png" width="800"/>
-
-### Get Employee by ID
-
-<img src="./screenshots/get-employee-by-id.png" width="800"/>
-
-### Update Employee
-
-<img src="./screenshots/update-employee.png" width="800"/>
-
-### Delete Employee
-
-<img src="./screenshots/delete-employee.png" width="800"/>
-
-### Unauthorized Access Attempt (No Token)
-
-<img src="./screenshots/unauthorized.png" width="800"/>
-
-### Access Denied (Non-Admin User)
-
-<img src="./screenshots/admin-only.png" width="800"/>
+6. **Confirm access control** by repeating step 5 with a non-admin token (expect `403`) and with no token at all (expect `401`).
 
 ---
 
