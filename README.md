@@ -7,7 +7,7 @@
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 ![GitHub stars](https://img.shields.io/github/stars/aDARSH41Hub/Prodigy_FS_02?style=social)
 
-A secure backend system that allows **administrators** to perform full CRUD (Create, Read, Update, Delete) operations on employee records, built with **Node.js, Express.js, and MongoDB**, developed as part of the **Prodigy InfoTech Full Stack Web Development Internship** (Task 2).
+A full-stack Employee Management System built with **React,Node.js, Express.js and MongoDB**,developed as part of the **Prodigy InfoTech Full Stack Web Development Internship** (Task 2). The application provides secure JWT authentication, role-based access control and complete CRUD functionality for employee management.
 
 Access to every employee route is restricted to authenticated admin users only, built on top of the JWT authentication system from Task 1.
 
@@ -462,7 +462,7 @@ See the [LICENSE](LICENSE) file for details.
 ## 👨‍💻 Author
 
 **Adarsh Pratap Singh**
-Computer Science Engineering Student
+BTech Engineering Student
 
 GitHub: [@aDARSH41Hub](https://github.com/aDARSH41Hub)
 LinkedIn: [linkedin.com/in/adarsh493](https://www.linkedin.com/in/adarsh493/)
