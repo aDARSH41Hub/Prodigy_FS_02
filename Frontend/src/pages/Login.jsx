@@ -28,66 +28,64 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-canvas px-4">
-      <div className="w-full max-w-sm">
-        <div className="mb-8 text-center">
-          <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-md bg-accent font-display text-base font-semibold text-white">
-            E
-          </div>
-          <h1 className="font-display text-xl font-semibold text-ink">Employee Console</h1>
-          <p className="mt-1 text-sm text-muted">Sign in with your admin account</p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="rounded-lg border border-line bg-surface p-6 shadow-sm">
-          {error && (
-            <div className="mb-4 rounded-md border border-danger/30 bg-danger-light px-3 py-2 text-sm text-danger">
-              {error}
+    <div className="flex min-h-screen items-center justify-center bg-canvas px-4 py-10">
+      <div className="w-full max-w-md">
+        <div className="mb-10 rounded-[2rem] border border-line bg-white/95 p-8 shadow-2xl shadow-slate-200/50">
+          <div className="mb-8 text-center">
+            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[1.5rem] bg-accent text-lg font-semibold text-white shadow-sm">
+              E
             </div>
-          )}
+            <h1 className="text-3xl font-semibold text-ink">Employee Console</h1>
+            <p className="mt-2 text-sm leading-6 text-muted">Sign in with your admin account to manage teams.</p>
+          </div>
 
-          <label className="mb-4 block">
-            <span className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-muted">
-              Email
-            </span>
-            <input
-              required
-              type="email"
-              className="input"
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              placeholder="you@company.com"
-            />
-          </label>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {error && (
+              <div className="rounded-2xl border border-danger/30 bg-danger-light px-4 py-3 text-sm text-danger">
+                {error}
+              </div>
+            )}
 
-          <label className="mb-6 block">
-            <span className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-muted">
-              Password
-            </span>
-            <input
-              required
-              type="password"
-              className="input"
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              placeholder="••••••••"
-            />
-          </label>
+            <label className="block">
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.24em] text-muted">Email</span>
+              <input
+                required
+                type="email"
+                className="input"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                placeholder="you@company.com"
+              />
+            </label>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full rounded-md bg-accent py-2.5 text-sm font-medium text-white hover:bg-accent-dark disabled:opacity-60"
-          >
-            {loading ? "Signing in…" : "Sign in"}
-          </button>
-        </form>
+            <label className="block">
+              <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.24em] text-muted">Password</span>
+              <input
+                required
+                type="password"
+                className="input"
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                placeholder="••••••••"
+              />
+            </label>
 
-        <p className="mt-5 text-center text-sm text-muted">
-          Don't have an account?{" "}
-          <Link to="/signup" className="font-medium text-accent hover:underline">
-            Create one
-          </Link>
-        </p>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-2xl bg-accent py-3 text-sm font-semibold text-white transition hover:bg-accent-dark disabled:opacity-60"
+            >
+              {loading ? "Signing in…" : "Sign in"}
+            </button>
+          </form>
+
+          <p className="mt-6 text-center text-sm text-muted">
+            Don't have an account?{" "}
+            <Link to="/signup" className="font-medium text-accent hover:underline">
+              Create one
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
