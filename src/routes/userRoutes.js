@@ -1,23 +1,26 @@
 const express = require("express");
+
 const router = express.Router();
 
 const { protect } = require("../middleware/authMiddleware");
 const { authorize } = require("../middleware/roleMiddleware");
 
-// Logged in users only
-router.get("/profile", protect, (req, res) => {
-    res.status(200).json({
-        success: true,
-        data: req.user
-    });
-});
+const {
+    getProfile,
+    getAdminAccess,
+} = require("../controllers/userController");
 
-// Admin only
-router.get("/admin", protect, authorize("admin"), (req, res) => {
-    res.status(200).json({
-        success: true,
-        message: "Welcome Admin!"
-    });
-});
+// All user routes require authentication.
+router.use(protect);
+
+// Logged-in users only.
+router.get("/profile", getProfile);
+
+// Admin only.
+router.get(
+    "/admin",
+    authorize("admin"),
+    getAdminAccess
+);
 
 module.exports = router;
