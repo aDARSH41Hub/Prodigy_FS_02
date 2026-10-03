@@ -184,10 +184,21 @@ const deleteEmployee = async (id) => {
     return employee;
 };
 
+/*
+|--------------------------------------------------------------------------
+| Get Workforce Statistics
+|--------------------------------------------------------------------------
+*/
+
+const getStats = async () => {
+    return employeeRepository.getStats();
+};
+
 module.exports = {
     createEmployee,
     getEmployees,
     getEmployeeById,
     updateEmployee,
     deleteEmployee,
+    getStats,
 };

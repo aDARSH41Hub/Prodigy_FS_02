@@ -8,6 +8,7 @@ const {
     getEmployeeById,
     updateEmployee,
     deleteEmployee,
+    getStats,
 } = require("../controllers/employeeController");
 
 const { protect } = require("../middleware/authMiddleware");
@@ -44,6 +45,17 @@ router.get(
     "/",
     validate(employeeQuerySchema, "query"),
     getEmployees
+);
+
+/*
+|--------------------------------------------------------------------------
+| Workforce Statistics
+|--------------------------------------------------------------------------
+*/
+
+router.get(
+    "/stats",
+    getStats
 );
 
 router.get(
