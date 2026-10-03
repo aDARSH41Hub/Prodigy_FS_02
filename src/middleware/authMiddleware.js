@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const AppError = require("../errors/AppError");
 
 const protect = async (req, res, next) => {
     try {
@@ -9,19 +10,25 @@ const protect = async (req, res, next) => {
             !authHeader ||
             !authHeader.startsWith("Bearer ")
         ) {
-            return res.status(401).json({
-                success: false,
-                message: "Not authorized. No token provided.",
-            });
+            return next(
+                new AppError(
+                    "Not authorized. No token provided.",
+                    401,
+                    "UNAUTHORIZED"
+                )
+            );
         }
 
         const token = authHeader.split(" ")[1];
 
         if (!token) {
-            return res.status(401).json({
-                success: false,
-                message: "Not authorized. No token provided.",
-            });
+            return next(
+                new AppError(
+                    "Not authorized. No token provided.",
+                    401,
+                    "UNAUTHORIZED"
+                )
+            );
         }
 
         const decoded = jwt.verify(
@@ -34,17 +41,23 @@ const protect = async (req, res, next) => {
         );
 
         if (!user) {
-            return res.status(401).json({
-                success: false,
-                message: "Not authorized. User not found.",
-            });
+            return next(
+                new AppError(
+                    "Not authorized. User not found.",
+                    401,
+                    "UNAUTHORIZED"
+                )
+            );
         }
 
         if (!user.isActive) {
-            return res.status(403).json({
-                success: false,
-                message: "User account is inactive.",
-            });
+            return next(
+                new AppError(
+                    "User account is inactive.",
+                    403,
+                    "ACCOUNT_INACTIVE"
+                )
+            );
         }
 
         req.user = user;
@@ -52,17 +65,23 @@ const protect = async (req, res, next) => {
         next();
     } catch (error) {
         if (error.name === "JsonWebTokenError") {
-            return res.status(401).json({
-                success: false,
-                message: "Not authorized. Invalid token.",
-            });
+            return next(
+                new AppError(
+                    "Not authorized. Invalid token.",
+                    401,
+                    "INVALID_TOKEN"
+                )
+            );
         }
 
         if (error.name === "TokenExpiredError") {
-            return res.status(401).json({
-                success: false,
-                message: "Not authorized. Token expired.",
-            });
+            return next(
+                new AppError(
+                    "Not authorized. Token expired.",
+                    401,
+                    "TOKEN_EXPIRED"
+                )
+            );
         }
 
         next(error);
